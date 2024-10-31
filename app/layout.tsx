@@ -1,4 +1,5 @@
 import "@/app/global.css";
+import { SessionProvider } from "next-auth/react";
 import { inter } from "@/app/fonts";
 import Header from "@/components/Header";
 import NavBar from "@/components/NavBar";
@@ -16,11 +17,13 @@ export default function RootLayout({ children }: Props) {
   return (
     <html lang="en">
       <body className={`${inter.className} antialiased bg-navy text-white flex flex-col`}>
-        <Header />
-        <div className={'flex flex-row'}>
-          <NavBar />
-          {children}
-        </div>
+        <SessionProvider>
+          <Header />
+          <div className={'flex flex-row'}>
+            <NavBar />
+            {children}
+          </div>
+        </SessionProvider>
       </body>
     </html>
   );
