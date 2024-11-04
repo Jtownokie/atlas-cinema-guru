@@ -3,7 +3,7 @@ import Card from "./Card";
 
 export default async function MovieCards() {
   return (
-    <div className="flex justify-evenly w-full flex-wrap">
+    <div className="grid grid-cols-3 gap-6 p-4">
       <Card />
       <Card />
       <Card />

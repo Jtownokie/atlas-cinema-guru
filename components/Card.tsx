@@ -8,18 +8,20 @@ import { StarIcon as SolidStar } from '@heroicons/react/24/solid';
 
 export default async function Card() {
   return (
-    <div className="group my-2 mx-4 w-3/12">
-      <ClockIcon className={'size-6 hidden z-10 group-hover:absolute inset-0 text-teal'} />
-      <StarIcon className={'size-6 hidden z-10 group-hover:absolute inset-0 text-teal'} />
+    <div className="relative group overflow-hidden rounded-lg outline outline-1 outline-teal">
+      <div className={'absolute top-2 right-2 flex space-x-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300'}>
+        <ClockIcon className={'w-6 h-6 cursor-pointer'} />
+        <StarIcon className={'w-6 h-6 cursor-pointer'} />
+      </div>
       <Image
         src={placeholder}
         alt="Movie Image"
-        className={'block rounded-lg'}
+        className={'object-cover w-full h-full'}
       />
-      <div>
-        <h2 className={'hidden z-10'}>Beneath the Surface (2021)</h2>
-        <p className={'hidden z-10'}>A marine biologist discovers a hidden underwater civilization</p>
-        <div className={'hidden z-10'}>Sci-Fi</div>
+      <div className={'absolute bottom-0 left-0 right-0 p-4 bg-light-navy to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300'}>
+        <h2 className={''}>Beneath the Surface (2021)</h2>
+        <p className={''}>A marine biologist discovers a hidden underwater civilization</p>
+        <div className={''}>Sci-Fi</div>
       </div>
     </div>
   );
