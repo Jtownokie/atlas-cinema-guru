@@ -1,6 +1,7 @@
 import { sql } from "@vercel/postgres";
 import { Question, User } from "./definitions";
 import { db } from "./db";
+import { titles } from "@/seed/titles";
 
 /**
  * Query all titles
@@ -15,31 +16,41 @@ export async function fetchTitles(
 ) {
   try {
     // Get favorites title ids
-    const favorites = (
+    const favorites = userEmail ? (
       await db
         .selectFrom("favorites")
         .select("title_id")
         .where("user_id", "=", userEmail)
         .execute()
-    ).map((row) => row.title_id);
+    ).map((row) => row.title_id)
+    : [];
 
     // Get watch later title ids
-    const watchLater = (
+    const watchLater = userEmail ? (
       await db
         .selectFrom("watchlater")
         .select("title_id")
         .where("user_id", "=", userEmail)
         .execute()
-    ).map((row) => row.title_id);
+    ).map((row) => row.title_id)
+    : [];
 
     //Fetch titles
-    const titles = await db
+    const titlesQuery = db
       .selectFrom("titles")
       .selectAll("titles")
       .where("titles.released", ">=", minYear)
-      .where("titles.released", "<=", maxYear)
-      .where("titles.title", "ilike", `%${query}%`)
-      .where("titles.genre", "in", genres)
+      .where("titles.released", "<=", maxYear);
+
+      if (query) {
+        titlesQuery.where("titles.title", "ilike", `%${query}%`);
+      }
+
+      if (genres.length > 0) {
+        titlesQuery.where("titles.genre", "in", genres);
+      }
+
+      const titles = await titlesQuery
       .orderBy("titles.title", "asc")
       .limit(6)
       .offset((page - 1) * 6)
