@@ -1,12 +1,12 @@
 // Favorites Page
 import FavoritesHeader from "@/components/FavoritesHeader";
-import MovieCards from "@/components/MovieCards";
+import FavoritesMovieCards from "@/components/FavoritesMovieCards";
 
 export default async function Page() {
   return (
-    <div className="flex flex-col w-screen h-screen">
+    <div className="flex flex-col w-screen">
       <FavoritesHeader />
-      <MovieCards />
+      <FavoritesMovieCards />
     </div>
   );
 }

@@ -1,6 +1,5 @@
 // Card Component
 import Image from 'next/image';
-import placeholder from '@/assets/placeholder.svg';
 import { ClockIcon } from '@heroicons/react/24/outline';
 import { StarIcon } from '@heroicons/react/24/outline';
 import { ClockIcon as SolidClock } from '@heroicons/react/24/solid';
@@ -15,7 +14,7 @@ type CardProps = {
   genre: string;
 }
 
-export default async function Card(props: CardProps) {
+export default function Card(props: CardProps) {
   return (
     <div className="relative group overflow-hidden rounded-lg outline outline-1 outline-teal">
       <div className={'absolute top-2 right-2 flex space-x-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300'}>
@@ -23,6 +22,7 @@ export default async function Card(props: CardProps) {
         <ClockIcon className={'w-6 h-6 cursor-pointer'} />
       </div>
       <Image
+        priority
         src={props.image}
         alt="Movie Image"
         width="600"
