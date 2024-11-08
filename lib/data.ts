@@ -18,24 +18,22 @@ export async function fetchTitles(
 ) {
   try {
     // Get favorites title ids
-    const favorites = userEmail ? (
+    const favorites = (
       await db
         .selectFrom("favorites")
         .select("title_id")
         .where("user_id", "=", userEmail)
         .execute()
-    ).map((row) => row.title_id)
-    : [];
+    ).map((row) => row.title_id);
 
     // Get watch later title ids
-    const watchLater = userEmail ? (
+    const watchLater = (
       await db
         .selectFrom("watchlater")
         .select("title_id")
         .where("user_id", "=", userEmail)
         .execute()
-    ).map((row) => row.title_id)
-    : [];
+    ).map((row) => row.title_id);
 
     //Fetch titles
     const titles = await db
