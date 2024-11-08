@@ -1,28 +1,18 @@
 // Movie Cards Component
 'use client'
-import { UsersTitle } from "@/lib/definitions";
 import Card from "./Card";
 import NextButton from "./NextButton";
 import PreviousButton from "./PreviousButton";
-import { useState, useEffect } from "react";
+import { UsersTitle } from "@/lib/definitions";
+import { useState } from "react";
 
-export default function MovieCards() {
-  const [movieTitles, setMovieTitles] = useState<UsersTitle[]>([]);
+interface MovieCardsProps {
+  movieData: UsersTitle[];
+  setMovieTitles: (data: UsersTitle[]) => void;
+}
+
+export default function MovieCards({ movieData, setMovieTitles }: MovieCardsProps) {
   const [currentPage, setCurrentPage] = useState(1);
-
-  useEffect(() => {
-    const fetchMovies = async () => {
-      try {
-        const res = await fetch(`/api/titles`);
-        const data = await res.json();
-        setMovieTitles(data.title);
-      } catch (err) {
-        console.error(err);
-      }
-    }
-
-    fetchMovies();
-  }, []);
 
   const handlePageChange = async (newPage: number) => {
     setCurrentPage(newPage);
@@ -38,13 +28,13 @@ export default function MovieCards() {
   return (
     <div className={'flex flex-col'}>
       <div className="grid grid-cols-3 gap-8 p-7 mx-7">
-        {movieTitles.map((title, index) => (
+        {movieData.map((title, index) => (
           <Card key={index} id={title.id} image={title.image} title={title.title} year={title.released} synopsis={title.synopsis} genre={title.genre}/>
         ))}
       </div>
       <div className={'flex justify-center mb-7'}>
-        <PreviousButton handlePageChange={handlePageChange} movieTitles={movieTitles} currentPage={currentPage} />
-        <NextButton handlePageChange={handlePageChange} movieTitles={movieTitles} currentPage={currentPage} />
+        <PreviousButton handlePageChange={handlePageChange} movieTitles={movieData} currentPage={currentPage} />
+        <NextButton handlePageChange={handlePageChange} movieTitles={movieData} currentPage={currentPage} />
       </div>
     </div>
   );

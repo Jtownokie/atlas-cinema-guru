@@ -38,21 +38,13 @@ export async function fetchTitles(
     : [];
 
     //Fetch titles
-    const titlesQuery = db
+    const titles = await db
       .selectFrom("titles")
       .selectAll("titles")
       .where("titles.released", ">=", minYear)
-      .where("titles.released", "<=", maxYear);
-
-      if (query) {
-        titlesQuery.where("titles.title", "ilike", `%${query}%`);
-      }
-
-      if (genres.length > 0) {
-        titlesQuery.where("titles.genre", "in", genres);
-      }
-
-      const titles = await titlesQuery
+      .where("titles.released", "<=", maxYear)
+      .where("titles.title", "ilike", `%${query}%`)
+      .where("titles.genre", "in", genres)
       .orderBy("titles.title", "asc")
       .limit(6)
       .offset((page - 1) * 6)
