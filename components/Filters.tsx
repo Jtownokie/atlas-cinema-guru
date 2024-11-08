@@ -63,6 +63,7 @@ export default function Filters({ setMovieTitles }: FiltersProps) {
             name="search"
             placeholder="Search Movies..."
             className={'bg-light-navy outline outline-1 outline-teal rounded-3xl p-2'}
+            value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
         </div>
@@ -73,7 +74,7 @@ export default function Filters({ setMovieTitles }: FiltersProps) {
               type="number"
               name="minYear"
               id="minYear"
-              defaultValue="1990"
+              value={minYear}
               step="1"
               className={'bg-light-navy outline outline-1 outline-teal rounded-3xl p-2'}
               onChange={(e) => setMinYear(e.target.value)}
@@ -85,7 +86,7 @@ export default function Filters({ setMovieTitles }: FiltersProps) {
               type="number"
               name="maxYear"
               id="maxYear"
-              defaultValue="2024"
+              value={maxYear}
               step="1"
               className={'bg-light-navy outline outline-1 outline-teal rounded-3xl p-2'}
               onChange={(e) => setMaxYear(e.target.value)}
@@ -97,7 +98,7 @@ export default function Filters({ setMovieTitles }: FiltersProps) {
       <h2 className={'mt-2 mb-1'}>Genres</h2>
         {genreOptions.map((genre) => (
           <button
-            type="submit"
+            type="button"
             key={genre}
             onClick={() => handleGenreToggle(genre)}
             className={`${
@@ -108,6 +109,7 @@ export default function Filters({ setMovieTitles }: FiltersProps) {
           </button>
         ))}
       </div>
+      <button type="submit" className={'hidden'}></button>
     </form>
   );
 }

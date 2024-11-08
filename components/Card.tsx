@@ -18,8 +18,12 @@ export default function Card(props: CardProps) {
   return (
     <div className="relative group overflow-hidden rounded-lg outline outline-1 outline-teal">
       <div className={'absolute top-2 right-2 flex space-x-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300'}>
-        <StarIcon className={'w-6 h-6 cursor-pointer'} />
-        <ClockIcon className={'w-6 h-6 cursor-pointer'} />
+        <button>
+          <StarIcon className={'w-6 h-6 cursor-pointer'} />
+        </button>
+        <button>
+          <ClockIcon className={'w-6 h-6 cursor-pointer'} />
+        </button>
       </div>
       <Image
         priority
