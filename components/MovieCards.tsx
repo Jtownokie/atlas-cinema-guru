@@ -1,5 +1,6 @@
 // Movie Cards Component
 'use client'
+
 import Card from "./Card";
 import NextButton from "./NextButton";
 import PreviousButton from "./PreviousButton";
@@ -29,7 +30,17 @@ export default function MovieCards({ movieData, setMovieTitles }: MovieCardsProp
     <div className={'flex flex-col'}>
       <div className="grid grid-cols-3 gap-8 p-7 mx-7">
         {movieData.map((title, index) => (
-          <Card key={index} id={title.id} image={title.image} title={title.title} year={title.released} synopsis={title.synopsis} genre={title.genre}/>
+          <Card 
+            key={index} 
+            id={title.id}
+            image={title.image}
+            title={title.title}
+            year={title.released}
+            synopsis={title.synopsis}
+            genre={title.genre}
+            favorited={title.favorited}
+            watchLater={title.watchLater}
+          />
         ))}
       </div>
       <div className={'flex justify-center mb-7'}>

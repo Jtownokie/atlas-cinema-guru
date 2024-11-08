@@ -13,11 +13,13 @@ type CardProps = {
   year: number;
   synopsis: string;
   genre: string;
+  favorited: boolean;
+  watchLater: boolean;
 }
 
 export default function Card(props: CardProps) {
-  const [inFavorites, updateFavorites] = useState(false);
-  const [inWatchLater, updateWatchLater] = useState(false);
+  const [inFavorites, updateFavorites] = useState(props.favorited);
+  const [inWatchLater, updateWatchLater] = useState(props.watchLater);
 
   const handleFavoritesUpdate = (favorited: boolean) => {
     if (!favorited) {

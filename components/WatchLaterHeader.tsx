@@ -1,6 +1,6 @@
 // Watch Later Header Component
 
-export default async function WatchLaterHeader() {
+export default function WatchLaterHeader() {
   return (
     <div className={'text-4xl font-bold text-center mt-10'}>
       Watch Later

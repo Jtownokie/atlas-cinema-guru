@@ -1,5 +1,6 @@
 // Home Page
 'use client'
+
 import Filters from "@/components/Filters";
 import MovieCards from "@/components/MovieCards";
 import { UsersTitle } from "@/lib/definitions";
