@@ -1,15 +1,14 @@
 // Home Page
+'use client'
 import Filters from "@/components/Filters";
 import MovieCards from "@/components/MovieCards";
-import { fetchTitles } from "@/lib/data";
 
-export default async function Page() {
-  let initialData = await fetchTitles(1, 1990, 2024, "", [""], "");
+export default function Page() {
 
   return (
     <div className="flex flex-col w-screen">
       <Filters />
-      <MovieCards initialData={initialData} />
+      <MovieCards />
     </div>
   );
 }

@@ -4,15 +4,25 @@ import { UsersTitle } from "@/lib/definitions";
 import Card from "./Card";
 import NextButton from "./NextButton";
 import PreviousButton from "./PreviousButton";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-interface MovieCardsProps {
-  initialData: UsersTitle[];
-}
-
-export default function MovieCards({ initialData }: MovieCardsProps) {
-  const [movieTitles, setMovieTitles] = useState(initialData);
+export default function MovieCards() {
+  const [movieTitles, setMovieTitles] = useState<UsersTitle[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
+
+  useEffect(() => {
+    const fetchMovies = async () => {
+      try {
+        const res = await fetch(`/api/titles`);
+        const data = await res.json();
+        setMovieTitles(data.title);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    fetchMovies();
+  }, []);
 
   const handlePageChange = async (newPage: number) => {
     setCurrentPage(newPage);
