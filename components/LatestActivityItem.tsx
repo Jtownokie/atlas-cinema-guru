@@ -1,10 +1,28 @@
 // Latest Activity Item Component
+'use client'
 
-export default async function LatestActivityItem() {
+type LatestActivityProps = {
+  timestamp: string;
+  activity: string;
+  title: string;
+}
+
+export default function LatestActivityItem({ timestamp, activity, title }: LatestActivityProps) {
+  const date = new Date(timestamp);
+  const formattedTime = date.toLocaleString('en-us', {
+    month: 'numeric',
+    day: 'numeric',
+    year: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+    second: 'numeric',
+    hour12: true,
+  });
+
   return (
     <div className={'mx-3 my-3 max-w-48'}>
-      <div>10/2/2024, 5:11:17 PM</div>
-      <div>Added <strong>Before the Dawn</strong> to watch later</div>
+      <div>{formattedTime}</div>
+      <div>{activity === 'FAVORITED' ? 'Favorited' : 'Added'} <strong>{title}</strong>{activity === 'WATCH_LATER' ? ' to watch later' : ''}</div>
     </div>
   );
 }
